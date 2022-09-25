@@ -1,8 +1,11 @@
 #pragma once
 #include <typeinfo>
 #include <vector>
+#include <future>
+#include <thread>
 #include <Windows.h>
 #include <iostream>
+#include <functional>
 #include "../../exceptions/number_exception.h"
 #include "../../exceptions/incorrect_input_data_exception.h"
 #include "../../data_types/BasicDataType.h"
@@ -80,6 +83,7 @@ private:
 	vector<BasicDataType*> convertMatrixIntoUpperTriangularMatrix(Matrix& tracking_Matrix);
 
 	static DWORD WINAPI calculateValueAt(void* dataForCalculation);
+	static void WINAPI calculateValueAtByUsingPromise(future<processingData>& pormiseData);
 
 
 public:
@@ -132,6 +136,7 @@ public:
 	static Matrix powForMatrix(Matrix  current_Matrix, int degree);
 	static Matrix createUnitMatrix(int Matrix_dimensions, ObjectTypeManager* type_manager);
 	static Matrix* multithreadedMultiplication(Matrix* firstMatrix, Matrix* secondMatrix, short int numberOfThreads);
+	static Matrix* multithreadedMultiplicationByUsingPromise(Matrix* firstMatrix, Matrix* secondMatrix, short int numberOfThreads);
 
 	//object methods
 
