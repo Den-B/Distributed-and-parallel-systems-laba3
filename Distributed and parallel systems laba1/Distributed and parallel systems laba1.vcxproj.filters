@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="MathCode">
+      <UniqueIdentifier>{fd1ae54f-b42c-4f92-b4cc-df1e7a3da015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MathCode\DataTypes">
+      <UniqueIdentifier>{364fc9b3-3022-4d14-bd70-dba3e4a4e00d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MathCode\Math">
+      <UniqueIdentifier>{c05b85d0-7a20-4144-bf5b-f3324757f70c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MathCode\exceptions">
+      <UniqueIdentifier>{f39023fc-00b1-4e88-83e0-b50de2aa2851}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MathCode\Math\Matrix">
+      <UniqueIdentifier>{34c98701-6d13-4b88-b598-ce9f59624e1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MathCode\MathInterface">
+      <UniqueIdentifier>{978ec261-8fa6-48cd-95e0-33b640094538}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Distributed and parallel systems laba1.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="IntegralSolver.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\data_types\DeductibleClass.cpp">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\data_types\FloatDataType.cpp">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\data_types\IntegerDataType.cpp">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\data_types\ObjectTypeManager.cpp">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\math\Matrix\Matrix.cpp">
+      <Filter>MathCode\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\exceptions\basic_exception.cpp">
+      <Filter>MathCode\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\exceptions\incorrect_input_data_exception.cpp">
+      <Filter>MathCode\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\exceptions\number_cast_exception.cpp">
+      <Filter>MathCode\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\exceptions\number_exception.cpp">
+      <Filter>MathCode\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\math\multiplicative_ring_classes_of_deductions .cpp">
+      <Filter>MathCode\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\math\substitution.cpp">
+      <Filter>MathCode\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\math\substitution_group.cpp">
+      <Filter>MathCode\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\math\ultimate_mathematics.cpp">
+      <Filter>MathCode\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\interface\BasicConsoleInterface.cpp">
+      <Filter>MathCode\MathInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\interface\BasicLog.cpp">
+      <Filter>MathCode\MathInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="MathCode\interface\MathematicsInterface.cpp">
+      <Filter>MathCode\MathInterface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IntegralSolver.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\data_types\BasicDataType.h">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\data_types\DeductibleClass.h">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\data_types\FloatDataType.h">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\data_types\IntegerDataType.h">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\data_types\NumberDataType.h">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\data_types\ObjectTypeManager.h">
+      <Filter>MathCode\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\math\Matrix\Matrix.h">
+      <Filter>MathCode\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\exceptions\basic_exception.h">
+      <Filter>MathCode\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\exceptions\incorrect_input_data_exception.h">
+      <Filter>MathCode\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\exceptions\number_cast_exception.h">
+      <Filter>MathCode\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\exceptions\number_exception.h">
+      <Filter>MathCode\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\math\multiplicative_ring_classes_of_deductions .h">
+      <Filter>MathCode\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\math\substitution.h">
+      <Filter>MathCode\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\math\substitution_group.h">
+      <Filter>MathCode\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\math\ultimate_mathematics.h">
+      <Filter>MathCode\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\interface\BasicConsoleInterface.h">
+      <Filter>MathCode\MathInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\interface\BasicLog.h">
+      <Filter>MathCode\MathInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="MathCode\interface\MathematicsInterface.h">
+      <Filter>MathCode\MathInterface</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
