@@ -83,7 +83,7 @@ private:
 	vector<BasicDataType*> convertMatrixIntoUpperTriangularMatrix(Matrix& tracking_Matrix);
 
 	static DWORD WINAPI calculateValueAt(void* dataForCalculation);
-	static void WINAPI calculateValueAtByUsingPromise(future<processingData>& pormiseData);
+	static void WINAPI calculateValueAtByUsingPromise(promise<processingData*>* promise);
 
 
 public:
@@ -96,6 +96,7 @@ public:
 	Matrix(vector<BasicDataType*>array_of_elements, int Number_of_rows, int Number_of_columns, ObjectTypeManager* object_type);
 	Matrix(int demension, ObjectTypeManager* object_type);
 	Matrix(int Number_of_rows, int Number_of_columns, ObjectTypeManager* object_type);
+
 
 	//Matrix fills with values
 

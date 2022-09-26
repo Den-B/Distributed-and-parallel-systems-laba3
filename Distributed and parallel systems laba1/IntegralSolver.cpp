@@ -19,6 +19,17 @@ DWORD IntegralSolver::findVolume(void* params)
 	return 0;
 }
 
+double IntegralSolver::findVolumeByFuture(double(*function)(double xCoordinate, double yCoordinate), vector<coordinates>* vectorOfCoordinates)
+{
+
+	double sumVolume = 0;
+	for (vector<coordinates>::iterator iter = vectorOfCoordinates->begin(); iter != vectorOfCoordinates->end(); iter++) {
+		sumVolume += findOneParallelogramVolume(*iter, function);
+	}
+	delete vectorOfCoordinates;
+	return sumVolume;
+}
+
 coordinates IntegralSolver::goForward( coordinates workArea,double& currentX, double& currentY, double stepX, double stepY)
 {
 	coordinates answer;
@@ -111,6 +122,47 @@ double IntegralSolver::solve(coordinates baseCoordinates, int numberOfThreads,in
 		threadHandles[thread] = CreateThread(NULL, 0, findVolume, (void*)data, NULL, NULL);
 	}
 	WaitForMultipleObjects(numberOfThreads, threadHandles, true, INFINITE);
+	return globalVolume;
+}
+
+double IntegralSolver::solveAsync(coordinates baseCoordinates, int numberOfThreads, int xFragmentation, int yFragmentation)
+{
+	globalVolume = 0;
+	if (numberOfThreads < 1 || numberOfThreads > 63)throw new exception(("Incorrect number of threads. You want to  use " + to_string(numberOfThreads) + " threads.").data());
+	if (xFragmentation < 1 || yFragmentation < 1) throw new exception("Incorrect fragmentation.");
+	if (baseCoordinates.xBegin >= baseCoordinates.xEnd || baseCoordinates.yBegin >= baseCoordinates.yEnd) throw new exception("Wrong basic coordinates of calculation area.");
+
+	vector<vector<coordinates>*> arrayOfData;
+
+	int lengthOfCoordinatesArray = ceil(double(xFragmentation * yFragmentation) / numberOfThreads);
+	double xStep = (baseCoordinates.xEnd - baseCoordinates.xBegin) / xFragmentation;
+	double yStep = (baseCoordinates.yEnd - baseCoordinates.yBegin) / yFragmentation;
+	double currentX = baseCoordinates.xBegin;
+	double currentY = baseCoordinates.yBegin;
+
+	for (int thread = 0; thread < numberOfThreads; thread++) {
+
+		vector<coordinates>* arrayOfCoordinates = new vector<coordinates>();
+		for (int element = 0; element < lengthOfCoordinatesArray && isPossibleToGoForward(baseCoordinates, currentX, currentY, xStep, yStep); element++) {
+
+			coordinates currentStep = goForward(baseCoordinates, currentX, currentY, xStep, yStep);
+			arrayOfCoordinates->push_back(currentStep);
+
+		}
+		arrayOfData.push_back(arrayOfCoordinates);
+
+	}
+	vector<future<double>> futurePool;
+	for (unsigned short int thread = 0; thread < numberOfThreads;thread++) {
+		future<double> currentFunctionFuture = async(launch::async, findVolumeByFuture,function, arrayOfData[thread]);
+		futurePool.push_back(move(currentFunctionFuture));
+	}
+
+	for (vector<future<double>>::iterator future = futurePool.begin(); future != futurePool.end(); future++) {
+		globalVolume += future->get();
+	}
+
+
 	return globalVolume;
 }
 

@@ -328,37 +328,36 @@
 		short int row = 0;
 		short int column = 0;
 		
-		vector<thread> threadPool;
-		vector<promise<processingData>> threadPromises;
+		vector<thread*> threadPool;
+		vector<promise<processingData*>*> threadPromises;
 
 		for (int currentThread = 0; currentThread < numberOfThreads; currentThread++) {
-			promise<processingData> promiseOfData;
-			future<processingData> futureData = promiseOfData.get_future();
-			thread newThread(calculateValueAtByUsingPromise,ref(futureData));
-			threadPromises.push_back(move(promiseOfData));
+			promise<processingData*>* promiseOfData = new promise<processingData*>();
+			thread* newThread = new thread(calculateValueAtByUsingPromise,promiseOfData);
+			threadPromises.push_back(promiseOfData);
 			threadPool.push_back(newThread);
 		}
 
 		try {
 
 			for (unsigned short int thread = 0; thread < numberOfThreads; thread++) {
-				processingData packForThread ;
-				packForThread.coords = new vector<matrixCoordinates*>;
-				packForThread.firstMatrix = firstMatrix;
-				packForThread.secondMatrix = secondMatrix;
-				packForThread.resultMatrix = result;
+				processingData* packForThread = new processingData();
+				packForThread->coords = new vector<matrixCoordinates*>;
+				packForThread->firstMatrix = firstMatrix;
+				packForThread->secondMatrix = secondMatrix;
+				packForThread->resultMatrix = result;
 				unsigned int element = 0;
 				do {
 					matrixCoordinates* data = new matrixCoordinates({ row,column });
-					packForThread.coords->push_back(data);
+					packForThread->coords->push_back(data);
 					element++;
 				} while (result->tryToGoForward(row, column) && element < step);
 
-				threadPromises[thread].set_value(packForThread);
+				threadPromises[thread]->set_value(packForThread);
 			}
 
 			for (unsigned int thread = 0; thread < numberOfThreads; thread++) {
-				threadPool[thread].join();
+				threadPool[thread]->join();
 			}
 			return result;
 		}
@@ -1168,15 +1167,15 @@
 
 	}
 
-	void __stdcall Matrix::calculateValueAtByUsingPromise(future<processingData>& promiseData)
+	void __stdcall Matrix::calculateValueAtByUsingPromise(promise<processingData*>* promise)
 	{
-
-		processingData globalData = promiseData.get();
-		Matrix* fMatrix = (Matrix*)(globalData.firstMatrix);
-		Matrix* sMatrix = (Matrix*)(globalData.secondMatrix);
-		Matrix* rMatrix = (Matrix*)(globalData.resultMatrix);
-		vector<matrixCoordinates*>::iterator end = globalData.coords->end();
-		for (vector<matrixCoordinates*>::iterator data = globalData.coords->begin(); data != end; data++) {
+		future<processingData*> futureObject = promise->get_future();
+		processingData* globalData = futureObject.get();
+		Matrix* fMatrix = (Matrix*)(globalData->firstMatrix);
+		Matrix* sMatrix = (Matrix*)(globalData->secondMatrix);
+		Matrix* rMatrix = (Matrix*)(globalData->resultMatrix);
+		vector<matrixCoordinates*>::iterator end = globalData->coords->end();
+		for (vector<matrixCoordinates*>::iterator data = globalData->coords->begin(); data != end; data++) {
 			double value = 0;
 
 			for (unsigned int index = 0; index < fMatrix->getNumberOfColumns(); index++) {
@@ -1193,7 +1192,7 @@
 
 			rMatrix->changeValueAt((*data)->row, (*data)->column, new FloatDataType(value));
 		}
-		cout << "!" << globalData.coords->size() << endl;
+		cout << "!" << globalData->coords->size() << endl;
 
 	}
 

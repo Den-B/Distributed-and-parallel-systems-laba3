@@ -222,7 +222,7 @@ void MathematicsInterface::taskSelection() {
 				yFragmentation = this->inputNumber("количество разбиений по Y");
 				numberOfThreads = this->inputNumber("количество потоков");
 				beginTime = time(NULL);
-				integralResult = solver->solve(basicCoordinates,numberOfThreads,xFragmentation,yFragmentation);
+				integralResult = solver->solveAsync(basicCoordinates,numberOfThreads,xFragmentation,yFragmentation);
 				endTime = time(NULL);
 				this->printString("Время выполнения: " + to_string(endTime - beginTime)+".");
 				this->printResultString(to_string(integralResult));
@@ -233,14 +233,14 @@ void MathematicsInterface::taskSelection() {
 
 				this->printString("Введите две матрицы.");
 				firstMatrix = new Matrix(this->inputMatrixRandom());
-				//this->printString("Сгенерирована матрица: ");
-				//this->lineIntent();
-				////displayNumberMatrix(*firstMatrix, "", 4);
+				this->printString("Сгенерирована матрица: ");
+				this->lineIntent();
+				displayNumberMatrix(*firstMatrix, "", 4);
 				this->lineIntent();
 				secondMatrix = new Matrix(this->inputMatrixRandom());
-				//this->printString("Сгенерирована матрица: ");
-				//this->lineIntent();
-				//displayNumberMatrix(*secondMatrix, "", 4);
+				this->printString("Сгенерирована матрица: ");
+				this->lineIntent();
+				displayNumberMatrix(*secondMatrix, "", 4);
 				this->lineIntent();
 
 
@@ -248,18 +248,18 @@ void MathematicsInterface::taskSelection() {
 
 				this->printString("Мультипоточная матрица: ");
 				beginTime = time(NULL);
-				resultMatrixMulti = Matrix::multithreadedMultiplication(firstMatrix,secondMatrix,numberOfThreads);
+				resultMatrixMulti = Matrix::multithreadedMultiplicationByUsingPromise(firstMatrix,secondMatrix,numberOfThreads);
 				endTime = time(NULL);
-				//this->displayNumberMatrix(*resultMatrixMulti, "*", 8);
-				//this->displayMatrixFile(*resultMatrixMulti, "*", 6, "MatrixMultiThread.txt");
+				this->displayNumberMatrix(*resultMatrixMulti, "*", 8);
+				this->displayMatrixFile(*resultMatrixMulti, "*", 6, "MatrixMultiThread.txt");
 				fixChangesInFileCons("MatrixMultiThread.txt", "Время выполнения: " + to_string(endTime - beginTime) + ".");
 				
 				this->printString("Однопоточная матрица: ");
 				beginTime = time(NULL);
 				resultMatrixOne = new Matrix(*firstMatrix * *secondMatrix);
 			    endTime = time(NULL);
-				//this->displayNumberMatrix(*resultMatrixOne, "*", 8);
-			  //  this->displayMatrixFile(*resultMatrixOne, "*", 6, "MatrixOneThread.txt");
+				this->displayNumberMatrix(*resultMatrixOne, "*", 8);
+			    this->displayMatrixFile(*resultMatrixOne, "*", 6, "MatrixOneThread.txt");
 				fixChangesInFileCons("MatrixOneThread.txt", "Время выполнения: " + to_string(endTime - beginTime) + ".");
 
 				this->printString("Итоговая матрица:");
